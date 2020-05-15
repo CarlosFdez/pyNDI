@@ -1,7 +1,7 @@
 import typing
 import re
 
-from .lib import lib, ffi
+from lib import lib, ffi
 
 def create_ndi_finder():
     pNDI_find = lib.NDIlib_find_create_v2(ffi.NULL)
@@ -46,7 +46,7 @@ class NDIFinder():
     def __del__(self):
         lib.NDIlib_find_destroy(self.pNDI_find)
 
-    def get_sources(self, wait_ms=50) -> typing.Iterable[NDISource]:
+    def get_sources(self, wait_ms=5000) -> typing.Iterable[NDISource]:
         "Returns all sources that can be accessed on the current network"
         changed = lib.NDIlib_find_wait_for_sources(self.pNDI_find, wait_ms)
         if not changed:
@@ -59,7 +59,7 @@ class NDIFinder():
         sources = lib.NDIlib_find_get_current_sources(self.pNDI_find, p_nsources)
 
         num_sources = p_nsources[0]
-
+        #print(len(num_sources))
         # Update sources (create a new list so that the caller's == checks work)
         self.current_sources = []
         for i in range(num_sources):
@@ -69,5 +69,6 @@ class NDIFinder():
                 name=ffi.string(source.p_ndi_name).decode('utf-8'),
                 address=ffi.string(source.p_url_address).decode('utf-8')
             ))
+
 
         return self.current_sources
