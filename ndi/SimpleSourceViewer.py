@@ -35,9 +35,9 @@ if(len(NDIsources) > 0):
 					awaitUserInput = False
 					recieveSource = NDIsources[key]
 				else:
-					print("Input Not A Number OR Number not in NDI Range. Please pick a number between 0 and "+ len(NDIsources)-1)		
+					print("Input Not A Number OR Number not in NDI Range. Please pick a number between 0 and "+ str(len(NDIsources)-1))		
 			except:
-				print("Input Not A Number OR Number not in NDI Range. Please pick a number between 0 and "+ len(NDIsources)-1)
+				print("Input Not A Number OR Number not in NDI Range. Please pick a number between 0 and "+ str(len(NDIsources)-1))
 		
 		#If more than one source, ask user which NDI source they want to use		
 else:
