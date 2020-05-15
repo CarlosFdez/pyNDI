@@ -1,9 +1,9 @@
 # PyNDI
-
-A Very simple video reader for NDI using CFFI (must be added as a dependency) created by [CarlosFdez](https://github.com/CarlosFdez).
+ 
+A Very simple python video reader for NewTek NDI using CFFI (must be added as a dependency) created by [CarlosFdez](https://github.com/CarlosFdez).
 Very initial state, only reads video, use at your own risk.
 
-Tested with NDI 4.5.
+Tested with NewTek NDI 4.5 and Python 3.8.
 
 The NDI runtime must be installed. Recommended NDI tools to be installed too for testing. 
 
