@@ -1,5 +1,7 @@
 import sys
 import os.path
+import platform
+
 from cffi import FFI
 
 ffi = FFI()
@@ -145,8 +147,14 @@ ffi.cdef(r"""
 """)
 
 basedir = os.path.dirname(__file__)
-arch = 'x64' if sys.maxsize > 2**32 else 'x86'
-lib = ffi.dlopen(os.path.join(basedir, "bin", f"Processing.NDI.Lib.{arch}.dll"))
+uname = platform.uname()
+system = uname[0].lower()
+if system == 'linux':
+    machine = uname[4]
+    lib = ffi.dlopen(os.path.join(basedir, "bin", f"libndi.{system}.{machine}.so"))
+else: 
+    arch = 'x64' if sys.maxsize > 2**32 else 'x86'
+    lib = ffi.dlopen(os.path.join(basedir, "bin", f"Processing.NDI.Lib.{arch}.dll"))
 
 if not lib.NDIlib_initialize():
     print("Failed to initialized NDI")
