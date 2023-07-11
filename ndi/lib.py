@@ -149,7 +149,7 @@ ffi.cdef(r"""
 basedir = os.path.dirname(__file__)
 uname = platform.uname()
 system = uname[0].lower()
-if (system == 'linux'):
+if system == 'linux':
     machine = uname[4]
     lib = ffi.dlopen(os.path.join(basedir, "bin", f"libndi.{system}.{machine}.so"))
 else: 
