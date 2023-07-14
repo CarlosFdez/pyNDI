@@ -149,9 +149,11 @@ ffi.cdef(r"""
 basedir = os.path.dirname(__file__)
 uname = platform.uname()
 system = uname[0].lower()
+machine = uname[4]
 if system == 'linux':
-    machine = uname[4]
     lib = ffi.dlopen(os.path.join(basedir, "bin", f"libndi.{system}.{machine}.so"))
+elif (system == 'darwin'):
+    lib = ffi.dlopen(os.path.join(basedir, "bin", f"libndi.{system}.{machine}.dylib"))
 else: 
     arch = 'x64' if sys.maxsize > 2**32 else 'x86'
     lib = ffi.dlopen(os.path.join(basedir, "bin", f"Processing.NDI.Lib.{arch}.dll"))
